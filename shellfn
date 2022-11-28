@@ -1,0 +1,30 @@
+# save more history
+# HISTFILE="$HOME/.zsh_history"
+# HISTSIZE=10000000
+# SAVEHIST=10000000
+# write out history file after each command
+# setopt INC_APPEND_HISTORY
+# ignore all duplicates
+# setopt HIST_IGNORE_ALL_DUPS
+# trim whitespace when saving commands
+# setopt HIST_REDUCE_BLANKS
+
+# cd up a number of directories
+cd..() {
+	local n=1
+	if [ "$1" != "" -a "$1" -ge 0 ]; then
+		n="$1"
+	elif [ "$1" != "" ]; then
+		echo "Invalid number $1!"
+	fi
+	cd $(yes '../' | head -n "$n" | tr -d '\n')
+}
+
+# find non-ascii characters
+alias nonascii=grep --color=always '[^ -~]\+'
+
+# date in iso9601 format
+alias isodate='date "+%Y-%m-%d %H:%M:%S"'
+
+# find large files and directories
+du -h -d 1 | sort -hr | head -10
